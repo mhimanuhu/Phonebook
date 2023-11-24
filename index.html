@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phonebook Application</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        Phonebook
+    </header>
+    <div class="storage_details">
+    <div id="storageInfo">
+    </div>
+    <button onclick="clearLocalStorage()">Clear Local Storage</button>
+</div>
+<div class="new_contact">
+<button onclick="openForm()">+ Create Contact</button>
+</div>
+    <main id="contactList">
+       
+        <!-- Existing contact  -->
+    </main>
+
+    <div id="contactForm" style="display: none;">
+        <form onsubmit="addContact(event)">
+            <label for="name">Name:</label>
+            <input type="text" id="name" required>
+            <label for="number">Phone Number:</label>
+            <input type="tel" id="number" required>
+            <label for="profilePicture">Profile Picture (URL):</label>
+            <input type="text" id="profilePicture">
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+    <script>
+        // Loading existing contacts from local storage
+        window.onload = function () {
+            var contacts = JSON.parse(localStorage.getItem("contacts")) || [];
+            contacts.forEach(function (contact) {
+                addContactToDOM(contact.name, contact.number, contact.profilePicture);
+            });
+            updateStorageInfo();
+        }
+
+        // Listen for changes in local storage
+        window.addEventListener('storage', function (e) {
+            if (e.key === 'contacts') {
+                updateStorageInfo();
+            }
+        });
+
+        function openForm() {
+            document.getElementById("contactForm").style.display = "block";
+        }
+
+        function addContact(event) {
+            event.preventDefault();
+
+            
+            var name = document.getElementById("name").value;
+            var number = document.getElementById("number").value;
+            var profilePicture = document.getElementById("profilePicture").value;
+
+            
+            addContactToDOM(name, number, profilePicture);
+
+            
+            document.getElementById("contactForm").style.display = "none";
+
+            
+            document.getElementById("name").value = "";
+            document.getElementById("number").value = "";
+            document.getElementById("profilePicture").value = "";
+
+         
+            var contacts = JSON.parse(localStorage.getItem("contacts")) || [];
+            contacts.push({ name: name, number: number, profilePicture: profilePicture });
+            localStorage.setItem("contacts", JSON.stringify(contacts));
+        }
+
+        function addContactToDOM(name, number, profilePicture) {
+   
+    var contactContainer = document.createElement("div");
+    contactContainer.classList.add("contact_container");
+
+
+    var imageUrl = profilePicture || "default.jpg"; 
+    var imageAltText = profilePicture ? "profile" : "default-profile"; 
+
+    contactContainer.innerHTML = `
+        <div class="user_image">
+            <img draggable="false" src="${imageUrl}" alt="${imageAltText}">
+        </div>
+        <div class="username_phone">
+            <div class="name">${name}</div>
+            <div class="number">${number}</div>
+        </div>
+        <button onclick="callContact('${number}')">Call</button>
+    `;
+
+
+    document.getElementById("contactList").appendChild(contactContainer);
+}
+
+
+        function callContact(number) {
+            
+            window.location.href = `tel:${number}`;
+        }
+
+
+        function clearLocalStorage() {
+            localStorage.clear();
+            alert("Local storage has been cleared.");
+        }
+
+
+        function updateStorageInfo() {
+            var remainingStorage = calculateRemainingStorage();
+            var storageInfoElement = document.getElementById("storageInfo");
+            storageInfoElement.textContent = `Storage: ${remainingStorage} MB remaining`;
+        }
+
+
+        function calculateRemainingStorage() {
+            var totalStorage = 5 * 1024 * 1024; // 5 MB assumed storage limit
+            var usedStorage = encodeURIComponent(JSON.stringify(localStorage)).length * 2;
+            var remainingStorage = (totalStorage - usedStorage) / (1024 * 1024);
+            return remainingStorage.toFixed(2);
+        }
+
+
+    </script>
+</body>
+</html>

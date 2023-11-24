@@ -1,0 +1,168 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    background: url("https://img.freepik.com/free-vector/flat-design-realistic-background_23-2150129820.jpg?w=2000&t=st=1700824031~exp=1700824631~hmac=bd693f80a3cf246893de0abbea2f53e0262bc7f4a1c9140199c861a68cddc6bd");
+}
+header{
+    background-color: blueviolet;
+    color: white;
+    font-size: 25px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: .3s all;
+}
+main{
+    margin-top: 20px;
+    height: 100vh;
+    padding: 10px;
+    transition: .3s all;    
+    overflow-y: scroll;
+}
+main button{
+    border: none;
+    padding: 10px 30px 10px 30px;
+    color: white;
+    background-color: blueviolet;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    transition: .3s all;
+}
+main button:hover{
+    background-color:blue;
+}
+.new_contact button{
+    border: none;
+    padding: 10px 30px 10px 30px;
+    color: white;
+    background-color: blueviolet;
+    margin: 10px 0px 0px 10px;
+    border-radius: 5px;
+    transition: .3s all;
+}
+.new_contact button:hover{
+    background-color: whitesmoke;
+    color: blue;
+}
+.contact_container{
+    background-color: white;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 30px 10px 30px;
+    margin-bottom: 7px;
+    transition: .3s all;
+}
+.contact_container:hover{
+    background-color: antiquewhite;
+    cursor: default;
+}
+.contact_container .user_image img{
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    transition: .3s all;
+}
+
+.number{
+    color: gray;
+}
+
+form{
+    position: absolute;
+    height: 200px;
+    width: 400px;
+    top: 20%;
+    left: 10%;
+    background-color:rgb(245, 245, 245) ;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding: 20px;
+    border-radius: 10px;
+}
+.storage_details{
+    background-color: blueviolet;
+    display: flex;
+    margin-top: 5px;
+    justify-content: space-evenly;
+    align-items: center;
+    color: white;
+    padding: 4px 0px 4px 0px;
+
+}
+.storage_details button {
+    border: none;
+    padding: 5px 10px 5px 10px;
+    background-color: white;
+    border-radius: 7px;
+    transition: .3s all;
+}
+.storage_details button:hover{
+    background-color: rgb(209, 69, 69);
+    color: white;
+}
+
+@media (max-width:500px){
+    header{
+        background-color: blueviolet;
+        color: white;
+        font-size: 18px;
+        height: 40px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .storage_details{
+        background-color: blueviolet;
+        display: flex;
+        flex-direction: column;
+        margin-top: 5px;
+        justify-content: space-between;
+        align-items: center;
+        height: 70px;
+        color: white;
+        padding: 4px 0px 4px 0px;
+    
+    }
+    .contact_container .user_image img{
+        height: 25px;
+        width: 25px;
+        border-radius: 50%;
+    }
+    .contact_container{
+        font-size: 12px;
+    }
+    main button{
+        border: none;
+        padding: 5px 15px 5px 15px;
+        color: white;
+        background-color: blueviolet;
+        margin-bottom: 10px;
+        font-size: 12px;
+        border-radius: 5px;
+    }
+    main{
+        margin-top: 20px;
+        height: 100vh;
+        padding: 5px;
+    }
+
+    .storage_details button {
+        border: none;
+        padding: 5px 10px 5px 10px;
+        background-color: white;
+        border-radius: 7px;
+        transition: .3s all;
+
+        margin-top: 5px;
+    }
+    form{
+        width: 300px;
+    }
+}
